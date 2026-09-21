@@ -1,36 +1,66 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 🚀 NextPRO - Full-Stack Modern Content & Blogging Platform
 
-## Getting Started
+**NextPRO** هي منصة تدوين ومشاركة محتوى عصرية وشاملة، تم بناؤها باستخدام أحدث تقنيات تطوير الويب لتقديم تجربة مستخدم سريعة، متجاوبة، وتفاعلية عالية الأداء.
 
-First, run the development server:
+---
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## 🛠️ التقنيات المستخدمة (Tech Stack)
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### **Frontend & Framework:**
+* **[Next.js](https://nextjs.org/) (App Router):** إطار العمل الأساسي للواجهات ودعم الـ SSR والـ Client Components.
+* **[React 19](https://react.dev/):** مكتبة بناء الواجهات البرمجية.
+* **[Tailwind CSS](https://tailwindcss.com/):** للتنسيق وإعطاء المكونات مظهرًا عصريًا وسريع الاستجابة (`Responsive Design`).
+* **[shadcn/ui](https://ui.shadcn.com/):** مكتبة مكونات واجهة المستخدم المنيفة والمبنية فوق Tailwind CSS.
+* **[Lucide React](https://lucide.dev/):** أيقونات متجهة (SVG) خفيفة وعصرية.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### **Backend, Database & Auth:**
+* **[Convex](https://www.convex.dev/):** قاعدة بيانات سحابية حية (Real-time Database) وإطار عمل للـ Backend.
+* **[Better-Auth / Convex Auth](https://www.convex.dev/):** لإدارة مصادقة المستخدمين (تسجيل الدخول، إنهاء الجلسات، والحماية).
+* **[Sonner](https://sonner.emilkowal.si/):** لإظهار إشعارات ناعمة وتفاعلية (Toast Notifications).
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+---
 
-## Learn More
+## ✨ المميزات الرئيسية (Key Features)
 
-To learn more about Next.js, take a look at the following resources:
+1. **شريط ملاحة ذكي ومتكيف (Responsive Navbar):**
+   * دعم التكيف الكامل على الهواتف والأجهزة المباشرة (`Select Menu` في الموبايل و`Links` في الشاشات الكبيرة).
+   * شريط بحث مخصص يظهر في الأسفل بأسلوب جذاب في الهواتف ومدمج في الشاشات الكبيرة.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+2. **محرك بحث فوري وقوي (Real-time Search):**
+   * نظام بحث حي بالربط مع Convex Backend.
+   * إظهار مؤشر تحكم أثناء جلب البيانات (`Searching...`).
+   * إغلاق تلقائي للنتائج عند النقر خارج نطاق البحث (`Click Outside`).
+   * زر سريع لإلغاء وإفراغ البحث (`Clear Input`).
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+3. **إدارة الحسابات والمصادقة (Authentication):**
+   * تسجيل الدخول والخروج مع التحديث اللحظي لحالة المستخدم (`useConvexAuth`).
 
-## Deploy on Vercel
+4. **تصفح وإنشاء المقالات (Blog & Content Management):**
+   * عرض أحدث المقالات مع تخصيص العناوين والنصوص المقصوصة (`line-clamp`).
+   * واجهة إنشاء وتعديل المقالات بشكل سلس.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+5. **دعم الوضع المظلم والفاتح (Dark & Light Mode):**
+   * تبديل متناسق باستخدام مكون `ModeToggle`.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+---
+
+## 📁 هيكلية المشروع (Project Structure)
+
+```text
+├── app/
+│   ├── blog/              # صفحات المقالات
+│   ├── create/            # صفحة إنشاء مقال جديد
+│   ├── login/             # صفحة تسجيل الدخول
+│   ├── signup/            # صفحة إنشـاء حساب
+│   ├── layout.tsx         # الهيكل العام للتطبيق
+│   └── page.tsx           # الصفحة الرئيسية (Landing Page)
+├── components/
+│   ├── ui/                # مكونات مكتبة shadcn/ui (Input, Button, Select...)
+│   ├── navbar.tsx         # شريط الملاحة الرئيسي والتفاعلي
+│   ├── search.tsx         # مكون البحث الفوري الذكي
+│   └── mode-toggle.tsx    # زر تغيير الوضع المظلم/الفاتح
+├── convex/                # إعدادات وقواعد بيانات Convex Backend
+│   ├── _generated/        # الأكواد الموالدة تلقائيًا من Convex
+│   └── Post.ts            # استعلامات البحث والمقالات
+└── lib/
+    └── auth-client.ts     # إعدادات عميل المصادقة
