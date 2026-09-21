@@ -9,7 +9,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
 import { z } from "zod";
 import { postSchema } from "@/app/schemas/post";
-import { useMutation } from "convex/react";
+import { useMutation, useQuery } from "convex/react";
 import { api } from "@/convex/_generated/api";
 import { useRouter } from "next/navigation";
 import { useTransition } from "react";
@@ -18,10 +18,13 @@ import { Loader2 } from "lucide-react";
 import { Id } from "@/convex/_generated/dataModel";
 
 
+
 export default function CreatePage() {
     const [isPending, startTransition] = useTransition();
     const router = useRouter();
+    
 
+    const user = useQuery(api.presence.getuser);
     // 1. تعريف الـ Mutations بشكل صحيح في أعلى المكون
     const createPost = useMutation(api.Post.createPost);
     const generateUploadUrl = useMutation(api.Post.imageid);
@@ -39,6 +42,13 @@ export default function CreatePage() {
         startTransition(async () => {
             try {
                 let storageId: Id<"_storage"> | undefined = undefined;
+                
+                const userId = user?._id;
+                if (!userId) {
+                    toast.error("You must be logged in to create a post.");
+                    router.push("/login");
+                    return;
+                }
 
                 if (data.image) {
                     // 2. استدعاء دالة جلب الرابط مباشرة

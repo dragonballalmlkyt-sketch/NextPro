@@ -10,7 +10,12 @@ const nextConfig: NextConfig = {
         port: "",
       },
       {
-        hostname: "helpful-herring-958.convex.cloud",
+        hostname: '*.convex.site',
+        protocol: "https",
+        port: "",
+      },
+      {
+        hostname: '*.convex.cloud',
         protocol: "https",
         port: "",
       }
